@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int i=m+n-1;
+        int ix=m-1;
+        int jx=n-1;
+        while(ix>=0&&jx>=0)
+        {
+            if(nums1[ix]<=nums2[jx])
+            {
+                nums1[i--]=nums2[jx--];
+            }
+            else 
+            {
+                nums1[i--]=nums1[ix--];   
+            }
+        }
+        while(ix>=0)
+        {
+            nums1[i--]=nums1[ix--];
+        }
+        while(jx>=0)
+        {
+            nums1[i--]=nums2[jx--];
+        }
+    }
+};
