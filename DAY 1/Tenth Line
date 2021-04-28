@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+	int count = 0;
+	std::ifstream myFile("C:\\Users\\araks\\Desktop\\text.txt");
+	std::string str;
+	for (int i = 0; i < 10; ++i)
+	{
+		if (!myFile.eof())
+		{
+			++count;
+			getline(myFile, str);
+		}
+		else
+		{
+			break;
+		}
+	}
+	if (count != 10)
+	{
+		std::cout << "There is no line 10.";
+	}
+	else
+	{
+		std::cout << str;
+	}
+	return 0;
+}
