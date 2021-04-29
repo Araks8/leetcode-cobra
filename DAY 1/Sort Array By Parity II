@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<int> sortArrayByParityII(vector<int>& nums) {
+     std::vector<int>::iterator begin = nums.begin();
+    std::vector<int>::iterator end = nums.end();
+    int size = 0;
+    for (; begin < end; ++begin)
+    {
+        ++size;
+    }
+    int* arr = new int[size];
+    for (int i = 0, j = 1, ix = 0; (i < size || j<size);  ++ix)
+    {
+        if (nums[ix] % 2 == 0)
+        {
+            arr[i] = nums[ix];
+            i += 2;
+        }
+        if (nums[ix] % 2 == 1)
+        {
+            arr[j] = nums[ix];
+            j += 2;
+        }
+    }
+        while(!nums.empty())
+        {
+            nums.pop_back();
+        }
+    for (int i = 0; i < size; ++i)
+    {
+        nums.push_back(arr[i]);
+    }
+    delete[]arr;
+    return nums;
+    }
+};
