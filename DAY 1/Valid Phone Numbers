@@ -1,0 +1,136 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+
+int main() {
+	bool is_true = true;
+	std::vector<std::string> valid_nums;
+	std::vector<bool> validity;
+	int count = 0;
+	std::ifstream myFile("C:\\Users\\araks\\Desktop\\phone_numbers.txt");
+	std::string line;
+	while (!myFile.eof())
+	{
+		getline(myFile, line);
+		for (int i = 0; i < line.size(); ++i)
+		{
+			if (line.size()==12||line.size()==14)
+			{
+				if (line[0] != '(') {
+					if ((line[i] >= 48 && line[i] <= 57) || line[i] == '-')
+					{
+
+						if ((i == 3 || i == 7) && line[i] != '-')
+						{
+							validity.push_back(0);
+							break;
+						}
+						else if ((i == 3 || i == 7) && line[i] == '-')
+						{
+							validity.push_back(1);
+						}
+						if (i + 1 == line.size())
+						{
+							if (line[i + 1] != '\0')
+							{
+								validity.push_back(0);
+							}
+							else
+							{
+								validity.push_back(1);
+							}
+						}
+
+					}
+					else
+					{
+						break;
+					}
+				}
+				else
+				{
+					for (int j = 1; j < line.size(); ++j)
+					{
+						if (line[4] == ')') {
+							if ((line[j] >= 48 && line[j] <= 57) || line[j] == '-' || line[j == ')'])
+							{
+								if (j == 5 && line[j] != ' ')
+								{
+									validity.push_back(0);
+									break;
+								}
+								else if (j == 5 && line[j] == ' ')
+								{
+									validity.push_back(1);
+								}
+								if (j == 9 && line[j] == '-')
+								{
+									validity.push_back(1);
+								}
+								if (j + 1 == line.size())
+								{
+									if (line[j + 1] != '\0')
+									{
+										validity.push_back(0);
+									}
+									else
+									{
+										validity.push_back(1);
+									}
+								}
+							}
+							else
+							{
+								break;
+							}
+						}
+						else
+						{
+							break;
+						}
+					}
+					break;
+				}
+			}
+		}
+		std::vector<bool>::iterator begin = validity.begin();
+		std::vector<bool>::iterator end = validity.end();
+		for (; begin < end; ++begin)
+		{
+			++count;
+		}
+		if (count == 3)
+		{
+			int i = 0;
+			while (i < count)
+			{
+				if (!validity[i++])
+				{
+					is_true = false;
+				}
+			}
+		}
+		else
+		{
+			is_true = false;
+		}
+		if (is_true)
+		{
+			valid_nums.push_back(line);
+		}
+		while (!validity.empty())
+		{
+			validity.pop_back();
+		}
+		count = 0;
+		is_true = true;
+	}
+	std::vector<std::string>::iterator start = valid_nums.begin();
+	std::vector<std::string>::iterator finish = valid_nums.end();
+	for (int i=0; start < finish; ++start,++i)
+	{
+		std::cout << valid_nums[i] << std::endl;
+	}
+	return 0;
+}
