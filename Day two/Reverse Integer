@@ -6,8 +6,14 @@ public:
         while(x!=0)
         {
             int tmp=x%10;
-            if(num>INT_MAX/10 || (num==INT_MAX/10 && tmp>7)) return 0;
-            if (num < INT_MIN/10 || (num == INT_MIN/10 && tmp < -8)) return 0;
+            if(num>INT_MAX/10 || (num==INT_MAX/10 && tmp>7))
+            { 
+               return 0;
+            }
+            if (num < INT_MIN/10 || (num == INT_MIN/10 && tmp < -8)) 
+            {
+                return 0;
+            }
             num = (num * 10)+tmp;
             x=x/10;
         }
