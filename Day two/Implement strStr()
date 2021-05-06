@@ -1,0 +1,7 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+    int ix=haystack.find(needle);
+        return ix;
+    }
+};
